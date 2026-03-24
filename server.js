@@ -15,7 +15,7 @@ const app = express();
 const server = createServer(app);
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 const rooms = new Map();
 
