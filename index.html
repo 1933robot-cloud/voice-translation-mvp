@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voice Translation MVP</title>
+  <link rel="stylesheet" href="/app.css" />
+</head>
+<body>
+  <div class="wrap stack">
+    <div class="hero card">
+      <h1>Voice Translation MVP</h1>
+      <p>Speaker phone talks in Russian. OpenAI Realtime translates and speaks in English. Listener phone hears English audio.</p>
+      <p class="small">Use one phone as Speaker and the second phone as Listener.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card stack">
+        <h2 style="margin:0">Create new room</h2>
+        <button id="create-room">Create room</button>
+        <div id="new-room" class="small">No room created yet.</div>
+      </div>
+
+      <div class="card stack">
+        <h2 style="margin:0">Join existing room</h2>
+        <input id="room-id" type="text" placeholder="Enter room id" />
+        <div class="actions">
+          <button id="go-speaker">Open as Speaker</button>
+          <button id="go-listener" class="secondary">Open as Listener</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card small">
+      For phone use, deploy this app to HTTPS. The microphone will not work from a plain insecure origin on mobile browsers.
+    </div>
+  </div>
+
+  <script type="module">
+    const roomInput = document.getElementById('room-id');
+    const newRoom = document.getElementById('new-room');
+
+    document.getElementById('create-room').addEventListener('click', async () => {
+      const r = await fetch('/api/rooms/create', { method: 'POST' });
+      const data = await r.json();
+      roomInput.value = data.roomId;
+      newRoom.innerHTML = `Room created: <strong>${data.roomId}</strong><br><a href="/speaker.html?room=${data.roomId}">Speaker link</a><br><a href="/listener.html?room=${data.roomId}">Listener link</a>`;
+    });
+
+    document.getElementById('go-speaker').addEventListener('click', () => {
+      const roomId = roomInput.value.trim();
+      if (!roomId) return;
+      location.href = `/speaker.html?room=${encodeURIComponent(roomId)}`;
+    });
+
+    document.getElementById('go-listener').addEventListener('click', () => {
+      const roomId = roomInput.value.trim();
+      if (!roomId) return;
+      location.href = `/listener.html?room=${encodeURIComponent(roomId)}`;
+    });
+  </script>
+</body>
+</html>

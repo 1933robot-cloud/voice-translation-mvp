@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Listener</title>
+  <link rel="stylesheet" href="/app.css" />
+</head>
+<body>
+  <div class="wrap stack">
+    <div class="header">
+      <h1 style="margin:0">Listener · RU → EN</h1>
+      <a href="/">← Back</a>
+    </div>
+
+    <div class="card stack">
+      <div><strong>Room:</strong> <span id="room-id"></span></div>
+      <div><strong>Client:</strong> <span id="client-id"></span></div>
+      <div><strong>Status:</strong> <span id="listener-status" class="badge warn">joining</span></div>
+      <div><strong>Speaker:</strong> <span id="speaker-id">waiting</span></div>
+      <div class="actions">
+        <button id="enable-audio">Enable audio</button>
+      </div>
+      <audio id="listener-audio" autoplay playsinline controls></audio>
+    </div>
+
+    <div class="card stack">
+      <h2 style="margin:0">Technical log</h2>
+      <pre id="log" class="log"></pre>
+    </div>
+  </div>
+
+  <script type="module" src="/listener.js"></script>
+</body>
+</html>

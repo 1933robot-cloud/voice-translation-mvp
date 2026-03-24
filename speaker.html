@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speaker</title>
+  <link rel="stylesheet" href="/app.css" />
+</head>
+<body>
+  <div class="wrap stack">
+    <div class="header">
+      <h1 style="margin:0">Speaker · RU → EN</h1>
+      <a href="/">← Back</a>
+    </div>
+
+    <div class="grid-2">
+      <div class="card stack">
+        <div><strong>Room:</strong> <span id="room-id"></span></div>
+        <div><strong>Client:</strong> <span id="client-id"></span></div>
+        <div><strong>Signal:</strong> <span id="signal-status" class="badge warn">connecting</span></div>
+        <div><strong>Realtime:</strong> <span id="realtime-status" class="badge warn">idle</span></div>
+        <div><strong>Listeners:</strong> <span id="listeners-count">0</span></div>
+        <div><strong>Mic:</strong> <span id="mic-state">off</span></div>
+        <div class="actions">
+          <button id="start-btn">Start session</button>
+          <button id="stop-btn" class="secondary">Stop session</button>
+          <button id="mute-btn" class="warn">Mute / Unmute mic</button>
+          <button id="enable-audio" class="secondary">Enable local audio</button>
+        </div>
+        <audio id="speaker-audio" autoplay playsinline controls></audio>
+      </div>
+
+      <div class="card stack">
+        <h2 style="margin:0">Connected listeners</h2>
+        <ul id="listeners-list" class="list"></ul>
+      </div>
+    </div>
+
+    <div class="card stack">
+      <h2 style="margin:0">Live subtitles</h2>
+      <div id="subtitles" class="subtitle-list"></div>
+    </div>
+
+    <div class="card stack">
+      <h2 style="margin:0">Technical log</h2>
+      <pre id="log" class="log"></pre>
+    </div>
+  </div>
+
+  <script type="module" src="/speaker.js"></script>
+</body>
+</html>
